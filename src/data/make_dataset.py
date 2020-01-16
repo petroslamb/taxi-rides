@@ -4,6 +4,8 @@ import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 
+from src.data.drop_outliers import outlier_removal
+
 
 @click.command()
 @click.argument('input_filepath', type=click.Path(exists=True))
@@ -14,6 +16,8 @@ def main(input_filepath, output_filepath):
     """
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
+    clean_data = outlier_removal(input_filepath, output_filepath)
+    return clean_data
 
 
 if __name__ == '__main__':

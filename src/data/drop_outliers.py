@@ -14,7 +14,10 @@ sns.set()
 def outlier_removal(input_filepath, output_filepath):
 
     # Load and clean
-    raw_pd = pd.read_csv(input_filepath, delimiter='\t')
+    raw_pd = pd.read_csv(
+        input_filepath + '/' + 'routes.csv',
+        delimiter='\t'
+    )
     raw_pd = raw_pd.dropna()
     raw_pd.request_date = pd.to_datetime(raw_pd.request_date)
     data = raw_pd
@@ -27,7 +30,7 @@ def outlier_removal(input_filepath, output_filepath):
         axis=1
     )
 
-    data.to_csv('../data/interim/raw_data_with_haversine_distance')
+    data.to_csv('./data/interim/raw_data_with_haversine_distance')
 
     tmp = data.copy().reset_index()
 
@@ -40,7 +43,9 @@ def outlier_removal(input_filepath, output_filepath):
             '{lower}<{col}<{upper}'.format(lower=lower, col=col, upper=upper)
         )
 
-    tmp.to_csv('../data/interim/dropped_outlier_data_with_haversine_distance')
+    tmp.to_csv(
+        './data/interim/dropped_outlier_data_with_haversine_distance'
+    )
 
     # Change gears to temporal data: trips-per-hour
     data2 = tmp.set_index(tmp.request_date)
@@ -64,7 +69,7 @@ def outlier_removal(input_filepath, output_filepath):
     )
 
     trips2.to_csv(
-        '../data/interim/trips_per_hour_dropped_na_and_all_outliers_'
+        './data/interim/trips_per_hour_dropped_na_and_all_outliers_'
         'under_001_and_over_999.csv'
     )
-    trips2.to_csv(output_filepath)
+    trips2.to_csv(output_filepath + '/' + 'trips_per_hour.csv')

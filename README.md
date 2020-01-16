@@ -1,7 +1,10 @@
-rides
+Taxi Rides
 ==============================
 
-Taxi rides prediction from a set of sample rides
+Taxi rides prediction from a set of sample rides.
+
+The deliverable is a report, but it is possible to reproduce datasets and
+models.
 
 Project Organization
 ------------
@@ -101,5 +104,22 @@ cd ./notebooks
 jupyter notebook
 ```
 
+## Recreate datasets
+
+You need the following folders:
+```
+mkdir ./data
+mkdir ./data/interim
+mkdir ./data/raw
+mkdir ./data/external
+mkdir ./data/processed
+```
+To recreate all datasets, make sure you have `./data/raw/routes.csv` and run:
+
+```
+make data
+```
+
+The process takes several minutes to complete.
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
