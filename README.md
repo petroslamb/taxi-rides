@@ -54,4 +54,52 @@ Project Organization
 
 --------
 
+# Installation
+
+
+## Setup environment
+
+To setup the project use `virtualenv` and create a `python3` virtual environment to install
+all dependencies. For example:
+
+```
+mkvirtualenv --python=python3 taxi-rides
+workon taxi-rides
+```
+
+## Install taxi-rides
+
+To install the source files and project dependencies, from the project root folder run:
+
+```
+pip install .
+pip install -r requirements.txt
+```
+
+The library `fbprophet` may appear to fail at first, but will shortly resume installation.
+
+## Usage
+
+Use the inventory above to locate where everything is in the project. Use `make` to explore your
+options, however, some are there for showcasing.
+
+All reports and figures are in the relevant folder:
+
+```
+./reports/
+```
+
+To run the notebooks you need to reproduce the datasets. Place the raw data inside:
+
+```
+./data/raw/routes.csv
+```
+and run `Jupyer Notebook`
+
+```
+cd ./notebooks
+jupyter notebook
+```
+
+
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
