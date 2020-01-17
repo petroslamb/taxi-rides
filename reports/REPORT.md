@@ -2,7 +2,7 @@
 
 This report centralizes the findings of the analysis and modelling.
 
-It was written in a hurry and should act only as a review of the project.
+It was written in a short timeframe and should act only as a review of the project.
 
 Much like a table of contents.
 
@@ -67,6 +67,11 @@ is missing, and is no use getting much into.
 The feature was created introduced to the datacet and explored with the 
 same methods (boxplot, histogram) as the rest.
 
+#### Other considerations
+
+There was no time, but a correlation matrix between dataset features was in order at
+this point.
+
 ### 1. Outlier removal and timeseries exploration
 
 This next notebook removed outliers which were under `0.5%` and over `99.5%`
@@ -76,6 +81,21 @@ per hour.
 Then after switching gear to the  timeseries depicting `trip-counts-per-hour`,
 a deliberate graphical exploration revealed the general trend and 2 most 
 prevelant seasonalities of the dataset.
+
+### 2. ARIMA forecasting
+
+This part goes through the ideas of stationality on a dataset and introduces
+the basic tests to clear that notion.
+
+Furthermore, autocorrelation and frequency graphs help give an idea of the 
+complexity inherent in the timeseries.
+
+After preparing a simple train-test split, an automatic grid search algorithm
+was used to determine the three key values for ARIMA.
+
+As a standard process forecasts are evaluated in and out of sample. Then the
+standardized residual is also evaluated in a qualitative manner. RMSE is used
+as a metric for out-of-sample predictions.
 
 
 
