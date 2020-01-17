@@ -6,6 +6,8 @@ It was written in a short timeframe and should act only as a review of the proje
 
 Much like a table of contents.
 
+![lima](./figures/lima_cool_map.jpg)
+
 ## Introduction
 
 Taxi ride analysis is an important metric for a company working in the field.
