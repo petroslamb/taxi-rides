@@ -122,4 +122,8 @@ make data
 
 The process takes several minutes to complete.
 
+After the process is complete, you should be able to run notebooks out of order
+in order to replicate results and models. Models will be added in the relevant
+directory.
+
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>

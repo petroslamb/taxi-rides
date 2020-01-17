@@ -10,7 +10,7 @@ def test_stationarity(
     - Calculate rolling stats
     - Plot original timeseries, mean and std
     - Perform Augmented Dickey-Fuller hypothesis test
-    """
+   """
 
     # Rolling statistics. We select one day: 24 hours
     rolmean = timeseries.rolling(window=24).mean()
