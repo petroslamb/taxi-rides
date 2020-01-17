@@ -236,7 +236,7 @@ tools allowed also for a cross validation of the model.
  Validation periods were 5 days long, with 15 day intervals between them, 
  starting only after the first 60 days of data.
  
- ## Conclusions
+## Conclusions
  
  In this analysis we showed several methods and tools that can help to model a 
  timeseries. After the initial data exploration and outlier removal, ARIMA was 
