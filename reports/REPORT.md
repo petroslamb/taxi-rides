@@ -47,12 +47,16 @@ helps to start thinking about possible outliers. Quick scatterplots and use of
 maps with `folium` (https://python-visualization.github.io/folium/) helped to 
 make sure, in a quick and dirty way, that trips were on land and at the right city.
 
+![trip-destinations](./figures/lat-lon-map-scatterplot.png)
+
 #### Trip counts
 
 After making sure there were not many trips outside the city, the next thing was
 to do the same boxplot and histogram for trip counts per day. 
 
 The data spawned for about 122 days.
+
+![trip-counts](./figures/hourly-trip-counts-plot.png)
 
 #### Passenger id's and addresses
 
@@ -102,6 +106,8 @@ As a standard process forecasts are evaluated in and out of sample with the use 
 Time did not allow for cross validation for in-sample-predictions.
 Then the standardized residual is also evaluated in a qualitative manner. 
 
+![naive-arima-forecast](./figures/naive-arima-forecast-full.png)
+
 The residuals showed that further information was preserved in them, but that happened
 most of the time. A qualititive look of the graph revealed that out of sample predictions
 did not contained no seasonality whatsoever.
@@ -139,6 +145,8 @@ As we already are aware from our preliminary exploration, that the data have 2 s
 24h and 7d seasonalities embedded in them. The multiplicative method of deseasoning
 was preferred, as it was noticed that freq variations increased in amplitude, when
 the trend did the same.
+
+![deseasoning](./figures/decompose-level-1.png)
 
 Two consecutive deseasoning operations allow for a clearer form of the trend line,
 and we try to model it using a very simple auto-ARIMA model, with minimum seasonality.
@@ -185,9 +193,13 @@ tools allowed also for a cross validation of the model.
  changepoints for the trend. Prophet allows for setting up holidays, where the model
  is allowed to deviate a lot from it's trend, in order to support them.
  
+ ![prophet-full](./figures/prophet-full-forecast.png)
+ 
  So Christmas season and Christmas day were introduced as holidays, 
  along with 14 Peruvian holidays, two of which occured during that period and excibit
  a spike in actual and modelled trip counts.
+ 
+ ![holiday-trends](./figures/prophet-full-holidays-trend.png)
  
  A floor of 0 was also stated, as it is impossible to have negative trips, and also
  a ceiling of 10000 trips per day. These two cuttofs are repected by the model's trend
@@ -195,6 +207,8 @@ tools allowed also for a cross validation of the model.
  
  Cross validation happened in-sample, where RMSE ranged around 1000, with less 
  fluctuations that the basic model.
+ 
+ ![rmse-plot](./figures/prophet-full-rmse-plot.png)
  
  ## Conclusions
  
