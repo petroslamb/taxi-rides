@@ -7,7 +7,7 @@ It describes the story of analysing the data, creating a timeseries of trips per
 hour and then attempts to model and predict the future with comon timeseries analysis
 techniques. 
 
-It was written in a short timeframe and should act only as an overreview of the project.
+It was written in a short timeframe and acts as the overeview of the project.
 
 Much like a table of contents.
 
@@ -79,7 +79,7 @@ is missing, and is no use getting much into.
 
 #### Trip distances
 
-The feature was created introduced to the datacet and explored with the 
+The feature was created introduced to the dataset and explored with the 
 same methods (boxplot, histogram) as the rest.
 
 #### Other considerations
@@ -96,7 +96,7 @@ per hour.
 
 Then after switching gear to the  timeseries depicting `trip-counts-per-hour`,
 a deliberate graphical exploration revealed the general trend and 2 most 
-prevelant seasonalities of the dataset.
+prevalent seasonalities of the dataset.
 
 ## Modeling and Forecasting
 
@@ -125,7 +125,8 @@ The residuals showed that further information was preserved in them, but that ha
 most of the time. A qualititive look of the graph revealed that out of sample predictions
 did not contained no seasonality whatsoever.
 
-RMSE is used as a metric for out-of-sample predictions. The value was not judged as bad: 
+RMSE is used as a metric for out-of-sample predictions. 
+The value was not judged as too bad, considering the scale of values: 
 
 - Test RMSE: 545.974
 
@@ -148,6 +149,8 @@ predictions contain strong evidence of seasonality, the RMSE score doubled.
 
 - Test RMSE: 1009.208
 
+On the other hand, the out-of-sample prediction had managed to model the 24-hour 
+season cycles we asked for it to model.
 
 ### 3. Deseason and revisit ARIMA
 [relevant notebook link](../notebooks/03-deseason-timeseries-ARIMA-revisited.ipynb)
@@ -215,16 +218,23 @@ tools allowed also for a cross validation of the model.
  along with 14 Peruvian holidays, two of which occured during that period and excibit
  a spike in actual and modelled trip counts.
  
+ Moreover both 24h and 7d prevalent seasonalities were detected.
+ 
  ![holiday-trends](./figures/prophet-full-holidays-trend.png)
  
  A floor of 0 was also stated, as it is impossible to have negative trips, and also
- a ceiling of 10000 trips per day. These two cuttofs are repected by the model's trend
- and to not surpass them. 
+ a ceiling of 10000 trips per day. These two cuttoffs are respected by the model's trend
+ and it does not surpass them.
+ 
+ You can see them as dashed lines in the first plot in this section.
  
  Cross validation happened in-sample, where RMSE ranged around 1000, with less 
  fluctuations that the basic model.
  
  ![rmse-plot](./figures/prophet-full-rmse-plot.png)
+ 
+ Validation periods were 5 days long, with 15 day intervals between them, 
+ starting only after the first 60 days of data.
  
  ## Conclusions
  
@@ -235,7 +245,7 @@ tools allowed also for a cross validation of the model.
  Then we used decomposition to examine how ARIMA would model a cleaned up trend from
  it's strongest seasonality coefficients, and indeed that went well.
  
- Finally we experimented with the Prophet model, which suprised us with it's features,
+ Finally we experimented with the Prophet model, which surprised with it's features,
  speed, ease of use and accuracy.
  
  
