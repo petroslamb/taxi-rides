@@ -82,6 +82,8 @@ Then after switching gear to the  timeseries depicting `trip-counts-per-hour`,
 a deliberate graphical exploration revealed the general trend and 2 most 
 prevelant seasonalities of the dataset.
 
+## Modeling and Forecasting
+
 ### 2. ARIMA forecasting
 
 This part goes through the ideas of stationality on a dataset and introduces
@@ -93,12 +95,119 @@ complexity inherent in the timeseries.
 After preparing a simple train-test split, an automatic grid search algorithm
 was used to determine the three key values for ARIMA.
 
-As a standard process forecasts are evaluated in and out of sample. Then the
-standardized residual is also evaluated in a qualitative manner. RMSE is used
-as a metric for out-of-sample predictions.
+Choosing the train test split to the unorthodox 99% - 1% happened so as to
+try to allow the model to adjust to the extreme trend changes in that final week.
+
+As a standard process forecasts are evaluated in and out of sample with the use of a graph. 
+Time did not allow for cross validation for in-sample-predictions.
+Then the standardized residual is also evaluated in a qualitative manner. 
+
+The residuals showed that further information was preserved in them, but that happened
+most of the time. A qualititive look of the graph revealed that out of sample predictions
+did not contained no seasonality whatsoever.
+
+RMSE is used as a metric for out-of-sample predictions. The value was not judged as bad: 
+
+- Test RMSE: 545.974
 
 
+#### Embed seasonality with SARIMA
+
+Next we explore the idea of forecasting seasonality along with trend, using an
+automated grid search model trainer, to chose the extra parameters for a proper
+SARIMA model forecasting. We allow seasonality to go as far as 24, for computational
+ease.
+
+Complicated SARIMA models, along with different parameter testing, lead to long
+training times.
+
+The standard procedure of qualitative evaluation through graphs is followed again,
+and RMSE is used as the numeric metric for out-of-sample predictions once again.
+
+Residual plots, were worse than the naive approach and although the out-of-sample 
+predictions contain strong evidence of seasonality, the RMSE score doubled.
+
+- Test RMSE: 1009.208
 
 
+### 3. Deseason and revisit ARIMA
 
+Deseasoning is the process of removing seasonality components from a timeseries,
+allowing only for the trend to remain. 
 
+As we already are aware from our preliminary exploration, that the data have 2 strong
+24h and 7d seasonalities embedded in them. The multiplicative method of deseasoning
+was preferred, as it was noticed that freq variations increased in amplitude, when
+the trend did the same.
+
+Two consecutive deseasoning operations allow for a clearer form of the trend line,
+and we try to model it using a very simple auto-ARIMA model, with minimum seasonality.
+
+Moreover, the fitting time has reduced significantly. 
+
+Evaluating the plot diagnostics of the standardized residuals, did not show much of 
+an improvement, but out-of-sample RMSE dropped a further.
+
+- Test RMSE: 183.112
+
+It is worth reminding at this point, that this value was for the mere trend of the timeseries, after
+removing the 2 seasonality components.
+
+### 4. Prophet basic
+
+Prophet is a procedure for forecasting time series data based on an additive model 
+where non-linear trends are fit with yearly, weekly, and daily seasonality, plus holiday effects. 
+It works best with time series that have strong seasonal effects and several seasons of historical data. 
+
+Prophet is robust to missing data and shifts in the trend, and typically handles outliers well.
+Running Prophet on the raw data, with NaN's did not seem to make a big difference for the method.
+
+Still the data was relatively clean to begin with, and the cleaned data was preferred for the final
+runs, so as to keep a golden standard throughout our experiments.
+
+Cross validation was conducted in sample, showing an average of 1000 for RMSE,
+including some fluctuations.
+
+The first run of Prophet, was with the basic settings. It the ease of use, combined with good 
+results and intuitive looking plots, that made it stand out. Not only was Prophet accurate,
+but also much quicker than SARIMA to train. That allowed for more iterations, while ready to use
+tools allowed also for a cross validation of the model.
+
+### 5. Prophet revisited
+ 
+ The final iteration with Prophet was more elaborate. 
+ 
+ Qualities like use of logistic (instead of linear) growth and use multiplicative  
+ (instead of additive) seasonality, to model both trend and seasonality allowed
+ for more room.
+ 
+ Quick experiments were made with model parameters to allow for more flexibility and
+ changepoints for the trend. Prophet allows for setting up holidays, where the model
+ is allowed to deviate a lot from it's trend, in order to support them.
+ 
+ So Christmas season and Christmas day were introduced as holidays, 
+ along with 14 Peruvian holidays, two of which occured during that period and excibit
+ a spike in actual and modelled trip counts.
+ 
+ A floor of 0 was also stated, as it is impossible to have negative trips, and also
+ a ceiling of 10000 trips per day. These two cuttofs are repected by the model's trend
+ and to not surpass them. 
+ 
+ Cross validation happened in-sample, where RMSE ranged around 1000, with less 
+ fluctuations that the basic model.
+ 
+ ## Conclusions
+ 
+ In this analysis we showed several methods and tools that can help to model a 
+ timeseries. After the initial data exploration and outlier removal, ARIMA was 
+ introduced, as a naive and a SARIMA modelling tool, with interesting results.
+ 
+ Then we used decomposition to examine how ARIMA would model a cleaned up trend from
+ it's strongest seasonality coefficients, and indeed that went well.
+ 
+ Finally we experimented with the Prophet model, which suprised us with it's features,
+ speed, ease of use and accuracy.
+ 
+ 
+
+ 
