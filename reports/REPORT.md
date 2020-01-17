@@ -1,18 +1,25 @@
 # Taxi Ride Analysis: Forecasting for the city of Lima
 
-This report centralizes the findings of the analysis and modelling.
+This report centralizes the findings of the analysis and modelling of a small 
+dataset or panel, of about 2M taxi ride trips, in period of 122 days.
 
-It was written in a short timeframe and should act only as a review of the project.
+It describes the story of analysing the data, creating a timeseries of trips per 
+hour and then attempts to model and predict the future with comon timeseries analysis
+techniques. 
+
+It was written in a short timeframe and should act only as an overreview of the project.
 
 Much like a table of contents.
+
+The meat of the project lies in the 
+[4 Jupyter Notebooks in the `notebooks/` folder](../notebooks).
 
 ![lima](./figures/lima_cool_map.jpg)
 
 ## Introduction
 
 Taxi ride analysis is an important metric for a company working in the field.
-Even more so for hourly trip count forecasting, which is chosen as
- our analysis centerpoint.
+Even more so for hourly trip count forecasting, which is chosen as our analysis centerpoint.
 
 ## Setup
 
@@ -33,6 +40,8 @@ The data was first explored and cleaned during the first two notebooks.
 Numbers on headers represent the relevant notebooks.
 
 ### 0. Load and explore data
+
+[relevant notebook link](../notebooks/00-load-and-data-exploration.ipynb)
 
 Pandas is used throughout the analysis as the container type of choice for our
 dataset and timeseries data.
@@ -79,6 +88,7 @@ There was no time, but a correlation matrix between dataset features was in orde
 this point.
 
 ### 1. Outlier removal and timeseries exploration
+[relevant notebook link](../notebooks/01-outlier-removal-and-timeseries-exploration.ipynb)
 
 This next notebook removed outliers which were under `0.5%` and over `99.5%`
 of the range of all numerical values: `lat`, `lon`, `distance` and `trip_counts`
@@ -91,6 +101,7 @@ prevelant seasonalities of the dataset.
 ## Modeling and Forecasting
 
 ### 2. ARIMA forecasting
+[relevant notebook link](../notebooks/02-ARIMA-forecasting.ipynb)
 
 This part goes through the ideas of stationality on a dataset and introduces
 the basic tests to clear that notion.
@@ -139,6 +150,7 @@ predictions contain strong evidence of seasonality, the RMSE score doubled.
 
 
 ### 3. Deseason and revisit ARIMA
+[relevant notebook link](../notebooks/03-deseason-timeseries-ARIMA-revisited.ipynb)
 
 Deseasoning is the process of removing seasonality components from a timeseries,
 allowing only for the trend to remain. 
@@ -164,6 +176,7 @@ It is worth reminding at this point, that this value was for the mere trend of t
 removing the 2 seasonality components.
 
 ### 4. Prophet basic
+[relevant notebook link](../notebooks/04-Prophet-baseline-on-clean-data.ipynb)
 
 Prophet is a procedure for forecasting time series data based on an additive model 
 where non-linear trends are fit with yearly, weekly, and daily seasonality, plus holiday effects. 
@@ -184,6 +197,7 @@ but also much quicker than SARIMA to train. That allowed for more iterations, wh
 tools allowed also for a cross validation of the model.
 
 ### 5. Prophet revisited
+[relevant notebook link](../notebooks/05-Prophet-revisited-%20with-holidays-and-multiplicative-seasoning-on-clean-data.ipynb)
  
  The final iteration with Prophet was more elaborate. 
  

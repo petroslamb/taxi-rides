@@ -1,10 +1,17 @@
 Taxi Rides
 ==============================
 
-Taxi rides prediction from a set of sample rides.
+Taxi rides is an attempt to model hourly demand for taxi demand, by 
+attempting prediction learned from a set of sample rides in a period of 122 days.
 
-The deliverable is a report, but it is possible to reproduce datasets and
-models.
+The [deliverable is a report](./reports/REPORT.md), 
+but the project ties to make it possible for anyone to reproduce datasets and
+models that are described in this report.
+
+Central to this attempt and the heart of the project are the 
+[5 Jupyter Notebooks in the `notebooks/` folder.](./notebooks)
+
+
 
 Project Organization
 ------------
