@@ -12,7 +12,7 @@ It was written in a short timeframe and acts as the overeview of the project.
 Much like a table of contents.
 
 The meat of the project lies in the 
-[4 Jupyter Notebooks in the `notebooks/` folder](../notebooks).
+[5 Jupyter Notebooks in the `notebooks/` folder](../notebooks).
 
 ![lima](./figures/lima_cool_map.jpg)
 
